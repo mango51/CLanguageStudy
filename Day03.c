@@ -67,7 +67,7 @@ sizeof 연산자 */
 	if~else문에서 종속문장 1 줄이면 중괄호 사용 안해도 됨 (생략 가능)
 
 	switch~case문
-	switch(비교할 값 (= 반드시 정수)){
+	switch(비교할 값 (= 반드시 정수로 나와야함, 연산식이 올 수도 있음)){
 		case 해당 값:					// 각 조건
 			종속문장;
 			break;
@@ -265,8 +265,7 @@ int main() {
 		break;
 	} // 만약 4를 입력하면 case들 중 해당하지 않았으므로 아무 것도 출력 안 됨 >> 하지만 default 넣으면 default문 실행 */
 
-
-	int getnum;
+	/*int getnum;
 	printf("입력: ");
 	scanf("%d", &getnum);
 	switch (getnum) {
@@ -282,7 +281,106 @@ int main() {
 		printf("2");
 	case 1:
 		printf("1");
+	} */
+	
+	/* // 이 코드의 아래 코드가 더욱 효율적이고 간단한 코드임
+	int numforSwitch;
+	printf("입력 : ");
+	scanf("%d", &numforSwitch);
+	if (numforSwitch >= 14) {
+		numforSwitch = 1;
+	}
+	else {
+		numforSwitch = 0;
+	}
+	switch (numforSwitch) {
+	case 1:
+		printf("14보다 크거나 같은 수\n");
+		break;
+
+	case 0:
+		printf("14보다 작은 수\n");
+		break;
 	}
 
+	int numnumforSwitch;
+	printf("입력 : ");
+	scanf("%d", &numnumforSwitch);
+	if (numnumforSwitch % 3) {
+		numnumforSwitch = 0;
+	}
+	else {
+		numnumforSwitch = 1;
+	}
+	switch (numnumforSwitch) {
+	case 0:
+		printf("거짓\n");
+		break;
+	case 1:
+		printf("참\n");
+		break;
+	} */
+
+	/* // 더 간단하고 효율적이 코드
+	int anothernum;
+	printf("입력 : ");
+	scanf("%d", &anothernum);
+	switch (anothernum>=14) {	
+	// anothernum >= : 14 처럼 비교할 대상 칸에 연산식 올 수 있음, 결과는 정수로 나오니까
+	case 0:
+		printf("14보다 작은 수\n");
+		break;
+	default:
+		printf("14보다 크거나 같은 수\n");
+		break;
+	}
+
+	int anothernum2;
+	printf("입력 : ");
+	scanf("%d", &anothernum2);
+	switch (anothernum2 % 3) {
+	case 0:
+		printf("참\n");
+		break;
+	default:
+		printf("거짓\n");
+		break;
+	} */
+
+	int korean, mathma, engli,intavg;
+	double avg;
+	printf("국어: ");
+	scanf("%d", &korean);
+	printf("수학: ");
+	scanf("%d", &mathma);
+	printf("영어: ");
+	scanf("%d", &engli);
+	avg = ((double)(korean + mathma + engli)) / 3;
+	intavg = (korean + mathma + engli) / 3;
+	if (avg - intavg == 0) {
+		printf("\n평균: %.lf\n", avg);
+	}
+	else {
+		printf("\n평균: %.2f\n", avg);
+	}
+	switch ((int)(avg / 10)) {
+	case 10:
+		//종속문장 사용하지 않고 다음으로 넘기면 case 9의 종속문장을 같이 사용
+	case 9:
+		printf("A\n");
+		break;
+	case 8:
+		printf("B\n");
+		break;
+	case 7:
+		printf("C\n");
+		break;
+	case 6:
+		printf("D\n");
+		break;
+	default:
+		printf("F\n");
+		break;
+	}
 	return 0;
 }
