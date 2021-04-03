@@ -167,9 +167,11 @@ int main() {
 	printf("EFGH\n"); */
 
 int card = 10000;
-int num,add,sub;
-do {
-	system("cls");
+int num,add,sub; // 값 선언되지 않은 num,sub, add는 쓰레기 값 할당되어 있음
+do { //do~while문 사용하면 종속문장 먼저 실행하고 그 다음 while문 적용 (한 번쯤은 종속문장 실행함)
+	// 쓰레기값 있는 num을 우선 실행하고 종속문장 중 num에 값 입력되어 해당 num 값을 while문에 적용
+	//while문으로 하면 위의 num의 값을 초기화하고 시작해야함 >> 초기화하지 않으면 쓰레기값이 있어서 while문에 적용하기엔 너무나 큰 숫자라 실행 안 됨
+	system("cls"); // window.h 사용해서 system 기능 사용 (system 기능 중 cls 기능 사용)
 	printf("카드 잔액: %d\n",card);
 	printf("1. 카드 잔액 충전\n");
 	printf("2. 카드 잔액 사용\n");
@@ -198,7 +200,7 @@ do {
 					Sleep(3000);
 					break;
 				}
-				else {
+				else { // 위의 if문이 실행되면 어짜피 break문을 통해 while문 빠져나가니까 else문 사용 안해도 됨 (else와 괄호 안 쓰고 사용해도 됨)
 					system("cls");
 					printf("잔액이 부족합니다. \n");
 					continue;
@@ -209,6 +211,7 @@ do {
 	case 3: 
 			system("cls");
 			break;
+			//break; 추가해도 위에서 이미 break;를 해서 switch문 나갔기 때문에 추가한 break;문 사용 안됨!!!
 
 	default:
 			printf("잘못 입력하셨습니다. 다시 입력하세요. \n");
@@ -217,7 +220,8 @@ do {
 
 	}
 
-} while (num != 3);
+} while (num != 3); //세미콜론까지 작성해야하는 do~while문
+//do~while문 사용하지 않고 switch문 안에 if(num==3){ break; } 사용해서 프로그램 종료할 수 있음!
 
 	return 0;
 }
