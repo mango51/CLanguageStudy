@@ -61,6 +61,83 @@ void Add2(int a, int b) {
 	printf("연산 결과: %d\n", a + b); //반환값 없음 >> void 사용
 }
 
+void Add3(int a, int b) {
+	printf("더한 값: %d\n", a + b);
+}
+void Sub(int a, int b) {
+	printf("뺀 값: %d\n", a - b);
+}
+int mult(int a, int b) {
+	return a * b;
+}
+int divide(int a, int b) {
+	return a / b;
+}
+void Calc(int num1,char op, int num2) {
+	switch (op) {
+	case 43: // 아스키코드로 사용 >> case '+': 사용해도 됨
+		Add3(num1, num2);
+		break;
+	case 45:
+		Sub(num1, num2);
+		break;
+	case 42:
+		printf("곱한 값: %d\n", mult(num1, num2));
+		break;
+	case 47:
+		printf("나눈 값: %d\n", divide(num1, num2));
+		break;
+	}
+}	// Calc() 함수가 다른 함수들에 비해 앞에 배치하면 실행 X 
+// 순차적으로 실행하는 C언어이므로 Calc() 함수 맨 위에 선언되면, 안에 있는 함수들이 해당 함수 (Calc() 함수) 밑에 선언되어 있기 때문에 실행 안됨
+// 컴퓨터가 Calc()함수(맨 위에 배치한 경우)를 봤을 때, 그 안에 있는 함수가 선언되지 않았다고 판단하기 때문에 에러
+// *** 절차지향적 언어인 C언어에서는 위에서 아래로 코드 실행 (순서 때문에 문제 발생 가능)
+
+int totalScore(int a, int b, int c) {
+	return a + b + c;
+}
+double avgScore(int a) {
+	return (double)a/3; // int형 a / int형 3 = 결과값은 int형!! >> 강제 형 변환 필요!!!
+	// 강제 형 변환 없이 a/3으로 하면 int형/int형이므로 결과값이 'int형'으로 나온 상태에서 double형 리턴값으로 하니 (int형정수).0000 이런식으로 나옴
+	// 그렇게 되면 정확한 평균값 나오지 않고 정수형만 나옴 (결과값이 int형으로만 나오기 때문)
+	// 강제 형 변환을 통해 a를 double형으로 바꿔서 3으로 나누면 double형/int형=double형으로 결과값 double형 나오기 때문에 소수점까지 평균값 정확히 나옴
+	// 강제 형 변환하지 않고도 return a/3.0; 으로 해결할 수 있음 >> 3.0은 double형이므로 a/3.0하면 결과값 double형으로 나오게함
+}
+
+char finalGrade(int a) {
+	if (a >= 90) {
+		return 'A';
+	}
+	else if (a >= 80) {
+		return 'B';
+	}
+	else if (a >= 70) {
+		return 'C';
+	}
+	else if (a >= 60) {
+		return 'D';
+	}
+	else
+		return 'F';
+}
+// finalGrade()함수를 switch문으로 사용할 수 있음 
+// char finalGrade(double a){
+//	switch ((int)avg/10){	//double형 avg를 int형 변환하고 10으로 나눠서 등급 나누기 쉽게하기
+//		case 10:
+//		case 9:
+//		 return 'A';
+//		 break;	// 없어도 됨 >> return하니까 반환값 'A'를 가지고 다시 원래 있던 곳으로 리턴 >> switch문에서 종료 (나옴)
+//		case 8:
+//		 return 'B';
+//		 break; // 없어도 됨 >> return하니까 반환값 'A'를 가지고 다시 원래 있던 곳으로 리턴 >> switch문에서 종료 (나옴)
+//		... 이런식으로 switch문 사용할 수 있음
+// break문이 없어도 제대로 실행 가능 >> 90점대 평균이라도 A로 정확히 나옴 (switch문에서 break문 없으면 원래 ABCDEF로 결과값 나옴)
+// 하지만 위의 코드 break문 없어도 평균 90점대면 A만 나옴 >> *** return 때문!!!
+// return으로 해당 함수 종료시키는 기능 >> 위의 코드에서 평균이 90점대이면 return 'A'; 코드 실행됨 
+// >> return 으로 switch문 빠져나가면서 'A'라는 반환값 가지고 나감 >> return하면 해당 함수에서 실행하고 다시 원래있는 곳으로 return
+
+
+
 int main() {
 	/* int num[10];
 	printf("입력 : ");
@@ -193,6 +270,60 @@ int main() {
 	printf("%d",result); // 91
 	Add2(5,7); // 반환값이 없는 함수이니 반환값 저장할 변수 없이 함수명과 인자만 사용해서 함수 호출
 	*/
+	
+	/* int num1, num2;
+	printf("숫자를 입력하세요: ");
+	scanf("%d %d", &num1, &num2);
+	Add3(num1, num2);
+	Sub(num1, num2);
+	int resultM = mult(num1, num2);
+	printf("곱한 값: %d", resultM);
+	int resultD = divide(num1, num2);
+	printf("\n나눈 값: %d", resultD); */
+
+	/* while (1) {
+		int num1, num2;
+		char op;
+		printf("연산 입력: ");
+		scanf("%d %c %d", &num1, &op, &num2);
+		if (op == '+') {
+			Add3(num1, num2);
+		}
+		else if (op == '-') {
+			Sub(num1, num2);
+		}
+		else if (op == '*') {
+			printf("곱한 값: %d", mult(num1, num2));
+		}
+		else if (op == '/') {
+			printf("나눈 값: %d", divide(num1, num2));
+		}
+		else
+			printf("연산자를 잘못 입력하셨습니다.");
+		printf("\n------------------------------------\n\n");
+	} */
+	
+	/* int num1, num2;
+	char op;
+	printf("연산 입력: ");
+	scanf("%d %c %d", &num1, &op, &num2);
+	Calc(num1, op, num2); // Calc()함수 호출하기 */
+
+	int ko, ma, en,total;
+	double avg;
+	char grade;
+
+	printf("국어, 수학, 영어 입력: ");
+	scanf("%d %d %d", &ko, &ma, &en);
+
+	total = totalScore(ko, ma, en);
+	printf("총합: %d\n", total);
+
+	avg = avgScore(total);
+	printf("평균: %.2f\n", avg);
+
+	grade = finalGrade(avg);
+	printf("등급: %c\n", grade);
 
 	return 0;
 }
